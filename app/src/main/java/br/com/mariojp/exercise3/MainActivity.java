@@ -14,17 +14,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    TarefaListaAdapter mAdapter;
+    TarefaListaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAdapter = new TarefaListaAdapter(this);
+        adapter = new TarefaListaAdapter(this);
 
         ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(mAdapter);
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if(prioridade < 1 || prioridade > 10) {
                     Toast.makeText(MainActivity.this, "A prioridade deve estar entre 1 e 10.", Toast.LENGTH_SHORT).show();
-                } else if(mAdapter.tarefaExiste(descricao)) {
+                } else if(adapter.tarefaExiste(descricao)) {
                     Toast.makeText(MainActivity.this, "Tarefa já cadastrada.", Toast.LENGTH_SHORT).show();
                 } else {
                     Tarefa tarefa = new Tarefa(descricao, prioridade);
-                    mAdapter.adicionarTarefa(tarefa);
+                    adapter.adicionarTarefa(tarefa);
 
                     alternarBotaoRemover();
                     editDescricao.setText("");
@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void removeTarefa(int position) {
-        mAdapter.removerTarefa(position);
+        adapter.removerTarefa(position);
         alternarBotaoRemover();
     }
 
     protected void alternarBotaoRemover() {
-        boolean vazio = mAdapter.isEmpty();
+        boolean vazio = adapter.isEmpty();
         ((Button)findViewById(R.id.buttonRemover)).setEnabled(!vazio);
     }
 }

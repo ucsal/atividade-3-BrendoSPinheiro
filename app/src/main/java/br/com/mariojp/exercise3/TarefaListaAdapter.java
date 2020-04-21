@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class TarefaListaAdapter extends BaseAdapter {
 
-    List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
+    List<Tarefa> Tarefas = new ArrayList<Tarefa>();
     Context context;
     Set<String> descricoes = new HashSet<String>();
 
@@ -24,12 +24,12 @@ public class TarefaListaAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listaTarefas.size();
+        return Tarefas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listaTarefas.get(position);
+        return Tarefas.get(position);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TarefaListaAdapter extends BaseAdapter {
 
     @Override
     public boolean isEmpty() {
-        return listaTarefas.isEmpty();
+        return Tarefas.isEmpty();
     }
 
     public boolean tarefaExiste(String descricao) {
@@ -73,13 +73,13 @@ public class TarefaListaAdapter extends BaseAdapter {
         descricoes.add(tarefa.getDescricao());
 
         if(this.isEmpty()) {
-            listaTarefas.add(tarefa);
+            Tarefas.add(tarefa);
         } else {
             int pNovaTarefa = tarefa.getPrioridade();
             int posicao = -1;
 
-            for(int i = 0; i < listaTarefas.size(); i++) {
-                int pTarefaAtual = listaTarefas.get(i).getPrioridade();
+            for(int i = 0; i < Tarefas.size(); i++) {
+                int pTarefaAtual = Tarefas.get(i).getPrioridade();
                 if(pNovaTarefa < pTarefaAtual) {
                     posicao = i;
                     break;
@@ -87,10 +87,10 @@ public class TarefaListaAdapter extends BaseAdapter {
             }
 
             if(posicao != -1){
-                listaTarefas.add(posicao, tarefa);
+                Tarefas.add(posicao, tarefa);
             }
             else {
-                listaTarefas.add(tarefa);
+                Tarefas.add(tarefa);
             }
         }
 
@@ -98,9 +98,9 @@ public class TarefaListaAdapter extends BaseAdapter {
     }
 
     public void removerTarefa(int position) {
-        Tarefa t = listaTarefas.get(position);
+        Tarefa t = Tarefas.get(position);
         descricoes.remove(t.getDescricao());
-        listaTarefas.remove(t);
+        Tarefas.remove(t);
 
         notifyDataSetInvalidated();
     }
